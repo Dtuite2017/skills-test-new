@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+# Create a HTML page which includes the following:-
+# - An input area to take a number input
+# - A button that calls a function called “increment”
+# - The initial result shown would be undefined
+# - A function called “increment” which increments the number input by the user from input in “a”
+# - A display area that displays the “incremented” value of the input
+
+# NOTE:
+# 1. The initial result should be undefined
+# 2. The initial increment should show the output as the number input.
+# 3. Once the initial result is cleared with the increment value, the increment value should use the existing result.
+
+# Code here
+-->
+<html>
+    <head>
+        <script src="/scripts/snippet-javascript-console.min.js?v=2"></script>
+        <title>Input Increment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <button onclick="location.href='index.html'" type="button">
+         Back</button>
+        <div>
+            <label for="userInput">Please enter number</label>
+            <input type="number" id="userInput" value="0"/>
+            <button onclick="increment()">Increment</button>
+            
+            <div id="display">Result = Undefined</div>
+        </div>
+        <script type="text/javascript">
+            var finalResult = undefined;
+
+            function increment()
+            {
+                var number = document.getElementById('userInput').value;
+                number = parseInt(number,10);
+                if(finalResult === undefined){
+                    finalResult = number;
+                }else if(isNaN(parseInt(finalResult))){
+                    finalResult = undefined;
+                }else{
+                    finalResult += number;
+                }
+                document.getElementById("display").innerHTML = finalResult;
+            }
+
+        </script>
+    </body>
+</html>

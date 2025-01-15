@@ -1,0 +1,35 @@
+Suggest a solution to the following problem
+
+The login system of a platform uses md5 with unique salts for each use for hashing to generate hashed passwords using openssl utility.
+The system has over a million users and possibly a million unique passwords.
+
+Being a security engineer, you’ve been tasked to upgrade the md5 hashing to the more secure PBKDF2 algorithm.
+
+Since there’s no way to get the plaintext back from the stored hashed passwords, you cannot directly migrate the passwords to the new format. Without forcing the users to manually generate a new password, suggest a way to migrate the users to be authenticated with the new mechanism.
+
+
+// Suggest the approach using pseudo code here
+Step 1 = Retrieve MD5 hash and salt for the user
+        methods:
+                stored_md5_hash = get_md5_hash(user)
+                stored_md5_salt = get_md5_hash(user)
+
+step 2 = hash the input in MD5 for the password with the retrieved salt
+        methods:
+                password_input_md5 = md5(password + stored_md5_salt)
+
+step 3 = verify that the MD5 password matches the stored hash password
+        methods:
+                password_input_md5 = stored_md5_hash
+
+step 4 = if the password matches and we have validation we can then rehash the password to PBKDF2
+        methods:
+                PBKDF2_password = PBKDF2(password + stored_md5_salt)
+              
+step 5 = Update the users password with the newly rehashed PBKDF2 value
+        methods:
+                Update_user_password(user, PBKDF2_password)
+               
+Step 6 = Test authentication
+        methods:
+                check that update successful
